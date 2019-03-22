@@ -20,6 +20,8 @@ public class Concentration extends Board
     private Tile[][] gameboard = makeBoard();
 
 
+    int matchedPairs = 0;
+
 
     //counters for the for loop
     private int rowCounter = 0;
@@ -66,8 +68,28 @@ public class Concentration extends Board
 
     }
 
-    public void printBoard(Concentration game){
-        this.gameboard = 
+    public void printBoard(){
+        this.gameboard = getGameboard();
+        rowCounter = 0;
+        columnCounter = 0;
+        for(Tile[] row:gameboard){
+
+
+            for(Tile column:row){
+
+                if(gameboard[rowCounter][columnCounter].isFaceUp() || gameboard[rowCounter][columnCounter].matched()){
+                    System.out.print("|"+gameboard[rowCounter][columnCounter].getFace()+"|");
+                }else{
+                    System.out.print(gameboard[rowCounter][columnCounter].getBack());
+                }
+                columnCounter++;
+
+            }
+            columnCounter = 0;
+            rowCounter++;
+            System.out.println("");
+
+        }
     }
 
 
@@ -81,9 +103,17 @@ public class Concentration extends Board
      */
     public boolean allTilesMatch() {
         
-        // to do
+        if(matchedPairs == 6){
+            return true;
+        }
         
         return false;
+    }
+
+    //flip all cards down
+    public void allCardsDown(int i1, int j1, int i2, int j2){
+        gameboard[i1][j1].faceUp(false);
+        gameboard[i2][j2].faceUp(false);
     }
 
     /**
@@ -102,9 +132,14 @@ public class Concentration extends Board
      */
     public String checkForMatch(int row1, int column1, int row2, int column2) {
         
-        // to do
+        if(gameboard[row1][column1].getFace() == gameboard[row2][column2].getFace()){
+            gameboard[row1][column1].foundMatch();
+            gameboard[row2][column2].foundMatch();
+            matchedPairs++;
+            return "match";
+        }
         
-        return "";
+        return "nope";
     }
 
     /**
@@ -118,8 +153,8 @@ public class Concentration extends Board
      * @param column the column value of Tile
      */
     public void showFaceUp (int row, int column) {
-        
-        // to do 
+        gameboard[row][column].faceUp(true);
+
     }
 
     /**

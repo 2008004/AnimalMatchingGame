@@ -59,25 +59,38 @@ public class ConcentrationRunner
             displayBoard();
 
             // determine if a match was found
-            String matched = game.checkForMatch(i1, j1, i2, j2);
-            System.out.println(matched);
+            //flip the cards back if no match
+            System.out.println(game.checkForMatch(i1,j1,i2,j2));
+
+
+            game.allCardsDown(i1,j1,i2,j2);
+
+
+
+
+            System.out.println("");
 
             // wait 2 seconds to start the next turn
             wait(2);
         }
+
         displayBoard();
         System.out.println("Game Over!");
 
     }
 
+
+
+
     /**
      * Clear the console and show the game board
      * Tiles can either indicate the card is  face up or face down
      */
+
     public static void displayBoard() {
 
-        System.out.print('\u000C');
-        System.out.println(game);
+        //System.out.print('\u000C');
+        game.printBoard();
     }
 
     /**

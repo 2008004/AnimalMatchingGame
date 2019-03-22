@@ -22,7 +22,7 @@ public class Tile
     private boolean faceUp;
     private boolean matched;
     private String cardFace; 
-    private String cardBack = "_____";
+    private String cardBack = "|_____|";
     private String cardMatched = "  *  ";
     
     /**
